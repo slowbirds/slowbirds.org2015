@@ -1,0 +1,20 @@
+{
+  "name": "slowbirds.org2015",
+  "version": "0.0.0",
+  "homepage": "http://slowbirds.org",
+  "authors": [
+    "slowbirds"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "dev/vendors",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "modularized-normalize-scss": "~3.0.2"
+  }
+}
