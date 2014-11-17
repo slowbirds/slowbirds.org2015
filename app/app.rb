@@ -14,7 +14,7 @@ get '/' do
   erb :index
 end
 
-get '/api/*' do
+get '/api/proxy/*' do
   channel = params[:splat][0]
 
   apis = JSON.parse(config)
