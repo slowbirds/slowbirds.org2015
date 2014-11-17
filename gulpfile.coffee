@@ -11,6 +11,7 @@ livereload = require 'gulp-livereload'
 plumber = require 'gulp-plumber'
 notify  = require 'gulp-notify'
 imagemin= require 'gulp-imagemin'
+del     = require 'del'
 
 pub_dir = 'app'
 
@@ -19,7 +20,7 @@ gulp.task 'compile-js', () ->
   gulp.src ['source/coffee/**/*.coffee']
     .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
     .pipe coffee()
-    .pipe gulp.dest(pub_dir+'/public/scripts_test')
+    .pipe gulp.dest('source/.tmp')
     .pipe uglify()
     .pipe concat(compileFileName)
     .pipe gulp.dest(pub_dir+'/public/scripts')
@@ -29,6 +30,7 @@ gulp.task 'compile-css', () ->
   gulp.src ['source/sass/**/*.scss','dev/vendors/**/*.css']
     .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
     .pipe sass()
+    .pipe gulp.dest('source/.tmp/')
     .pipe concat(compileFileName)
     .pipe minify()
     .pipe gulp.dest(pub_dir+'/public/styles')
@@ -50,15 +52,24 @@ gulp.task 'move-vendors', () ->
   gulp.src ['dev/vendors/**/*']
     .pipe gulp.dest(pub_dir+'/public/vendors')
 
+gulp.task 'move-pjs', () ->
+  gulp.src ['source/pjs/**/*']
+    .pipe gulp.dest(pub_dir+'/public/pjs')
+
 gulp.task 'webserver', () ->
   gulp.src pub_dir
     .pipe server(livereload:true)
 
+gulp.task 'clean' , (cb) ->
+  del ['app/public', 'app/view'], cb
+
 gulp.task 'compile', [
+  'clean',
   'compile-js',
   'compile-css',
   'compile-html',
   'move-vendors',
+  'move-pjs',
   'compile-image'
 ]
 gulp.task 'watch', () ->
@@ -70,6 +81,8 @@ gulp.task 'watch', () ->
     gulp.start 'compile-html'
   gulp.watch 'source/resources/**/*', ->
     gulp.start 'compile-image'
+  gulp.watch 'source/pjs/**/*', ->
+    gulp.start 'move-pjs'
 
 gulp.task 'default', [
   'compile',

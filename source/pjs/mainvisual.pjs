@@ -1,0 +1,70 @@
+var count = 0;
+var rot = rot2 = 0;
+var positive = true;
+void setup() {
+  size(640, 480,OPENGL);
+}
+
+void draw() {
+  triangle();
+}
+void triangle() {
+  background(0);
+  stroke(255);
+  height = 480;
+  width = 640;
+  big = random(0,12);
+  small = random(0,50);
+  if(big > 10) {
+    big = big*4;
+  }else {
+    big = 0;
+  }
+
+  translate(width/2, height/2-20);
+  float size = (height/6)+big;
+  noFill();
+  rot += PI/120;
+  rotateX(1.0);
+  rotateZ(rot);
+  strokeWeight(1);
+  beginShape(TRIANGLES);
+    vertex(size,size,size);
+    vertex(size,-size,-size);
+    vertex(-size,size,-size);
+
+    vertex(size,size,size);
+    vertex(size,-size,-size);
+    vertex(-size,-size,size);
+
+    vertex(size,size,size);
+    vertex(-size,size,-size);
+    vertex(-size,-size,size);
+
+    vertex(size,-size,-size);
+    vertex(-size,size,-size);
+    vertex(-size,-size,size);
+  endShape();
+
+  size = (height/10);
+  rot2 += PI/(-80+small);
+  rotateX(1.2);
+  rotateZ(rot2);
+  beginShape(TRIANGLES);
+    vertex(size/2,size/2,size/2);
+    vertex(size/2,-size/2,-size/2);
+    vertex(-size/2,size/2,-size/2);
+
+    vertex(size/2,size/2,size/2);
+    vertex(size/2,-size/2,-size/2);
+    vertex(-size/2,-size/2,size/2);
+
+    vertex(size/2,size/2,size/2);
+    vertex(-size/2,size/2,-size/2);
+    vertex(-size/2,-size/2,size/2);
+
+    vertex(size/2,-size/2,-size/2);
+    vertex(-size/2,size/2,-size/2);
+    vertex(-size/2,-size/2,size/2);
+  endShape();
+}

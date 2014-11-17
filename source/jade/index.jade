@@ -8,30 +8,29 @@ html
     link(href="/styles/application.min.css",rel="stylesheet",type="text/css")
   body
     div#container
-      h1 slowbirds.org
+      h1
+        a(href="http://slowbirds.org") slowbirds.org
       div.content
-        div#latest
+        div#mainvisual
+          canvas(datasrc="/pjs/mainvisual.pjs",width="640",height="480")
         h2 other works
         ul
           li
-            a(href="http://notes.slowbirds.org") notes
+            a(href="http://notes.slowbirds.org") NOTES
           li
-            a(href="http://notes.slowbirds.org/portfolio") portfolio
+            a(href="http://notes.slowbirds.org/portfolio") PORTFOLIO
           li
-            a(href="http://www.mixcloud.com/slowbirds") mixcloud
+            a(href="http://www.soundcloud.com/slowbirds") SOUND
           li
-            a(href="http://www.soundcloud.com/slowbirds") soundcloud
+            a(href="http://www.vimeo.com/slowbirds") VIDEO
           li
-            a(href="http://www.vimeo.com/slowbirds") vimeo
-      div.contact
-        h2 contact
-        ul
+            a(href="http://www.mixcloud.com/slowbirds") DJ
           li
-            a(href="http://www.facebook.com/slowbirds") facebook
+            a(href="http://www.facebook.com/slowbirds") FACEBOOK
           li
-            a(href="http://www.twitter.com/slowbirds") twitter
+            a(href="http://www.twitter.com/slowbirds") TWITTER
 
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+    script(src="/vendors/Processing.js/processing.min.js")
     script(src="/scripts/application.min.js",charset='UTF-8')
 
     script.
