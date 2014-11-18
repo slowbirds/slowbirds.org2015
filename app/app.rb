@@ -1,7 +1,6 @@
 #!/usr/bin/ruby
 require "bundler/setup"
 require 'sinatra'
-require 'sinatra/reloader'
 require 'net/http'
 require 'json'
 
