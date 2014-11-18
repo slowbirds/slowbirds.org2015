@@ -18,7 +18,7 @@ body {
 }
 h1 {
   background: url(/resources/logo.png) no-repeat center left;
-  height: 150px;
+  height: 180px;
   width: 350px;
   font-size: 0;
   margin: 0 auto;
@@ -62,14 +62,18 @@ li a {
   margin: 2px;
   padding: 8px;
   opacity: 0.8;
-
+  filter: blur($blur);
+  -webkit-filter: blur($blur);
+  -moz-filter: blur($blur);
+  -o-filter: blur($blur);
+  -ms-filter: blur($blur);
+  filter: url(#blur);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='6');
   &:hover {
-    filter: blur($blur);
-    -webkit-filter: blur($blur);
-    -moz-filter: blur($blur);
-    -o-filter: blur($blur);
-    -ms-filter: blur($blur);
-    filter: url(#blur);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='6');
+    filter: blur(0);
+    -webkit-filter: blur(0);
+    -moz-filter: blur(0);
+    -o-filter: blur(0);
+    -ms-filter: blur(0);
   }
 }
 iframe {
