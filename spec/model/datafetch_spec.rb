@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe Datafetch do
-  it "should print String" do
-    expect(Datafetch.new.puts).to be_instance_of String
+  it "existing API" do
+    real_obj = Datafetch.new
+    double_obj = double('datafetch')
+
+    ret = Datafetch.new.getData("vim")
+    ret
   end
 end
