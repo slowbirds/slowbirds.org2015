@@ -43,6 +43,6 @@ build/
 
 # output
 /app/public/*
-/views/*
+/app/views/*
 .sass*
 source/.tmp/
