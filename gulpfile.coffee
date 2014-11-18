@@ -61,10 +61,9 @@ gulp.task 'webserver', () ->
     .pipe server(livereload:true)
 
 gulp.task 'clean' , (cb) ->
-  del ['app/public', 'app/view'], cb
+  del ['app/public', 'app/views'], cb
 
 gulp.task 'compile', [
-  'clean',
   'compile-js',
   'compile-css',
   'compile-html',
