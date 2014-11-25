@@ -1,7 +1,3 @@
-config = {
-  'debug': true
-}
-
 $content = document.getElementById 'mainvisual'
 
 getJson = (type) ->
@@ -17,32 +13,27 @@ getJson = (type) ->
   xhr.send()
   return this
 
-$content.addEventListener "click", (e)->
-  setLoading($content);
-  getJson('vimeo')
-  e.currentTarget.removeEventListener e.type,arguments.callee,false
-
 gotJson = (res) ->
   data = JSON.parse res
-  debug data
   html = makeVimeo(data[0])
   $content.innerHTML = html
   return this
 
 error = (e) ->
-  debug e
   $content.innerHTML = e
 
-debug = (data) ->
-  if config.debug is true
-    console.log data
-  return this
-
 makeVimeo = (info) ->
-  debug info
   $content.style.width = info.width
   $content.style.height = info.height
   return '<iframe src="//player.vimeo.com/video/'+info.id+'" width="'+info.width+'" height="'+info.height+'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
 
 setLoading = (target) ->
   target.innerHTML = '<div class="spinner"><div class="bounce1"></div><div class="bounce1"></div><div class="bounce1"></div></div>'
+
+init = ->
+  $content.addEventListener "click", (e)->
+    setLoading($content);
+    getJson('vimeo')
+    e.currentTarget.removeEventListener e.type,arguments.callee,false
+
+init()

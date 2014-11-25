@@ -67,7 +67,8 @@ li a {
   -moz-filter: blur($blur);
   -o-filter: blur($blur);
   -ms-filter: blur($blur);
-  filter: url(#blur);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='6');
+  filter: url(#blur);
+  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='6');
   &:hover {
     filter: blur(0);
     -webkit-filter: blur(0);
