@@ -11,9 +11,11 @@ livereload = require 'gulp-livereload'
 plumber = require 'gulp-plumber'
 notify  = require 'gulp-notify'
 imagemin= require 'gulp-imagemin'
+open    = require 'gulp-open'
 del     = require 'del'
 
-pub_dir = 'app'
+pub_dir = 'app/public'
+view_dir = 'app/views'
 
 gulp.task 'compile-js', () ->
   compileFileName = 'application.min.js'
@@ -23,7 +25,7 @@ gulp.task 'compile-js', () ->
     .pipe gulp.dest('source/.tmp')
     .pipe uglify()
     .pipe concat(compileFileName)
-    .pipe gulp.dest(pub_dir+'/public/scripts')
+    .pipe gulp.dest(pub_dir+'/scripts')
 
 gulp.task 'compile-css', () ->
   compileFileName = 'application.min.css'
@@ -33,7 +35,7 @@ gulp.task 'compile-css', () ->
     .pipe gulp.dest('source/.tmp/')
     .pipe concat(compileFileName)
     .pipe minify()
-    .pipe gulp.dest(pub_dir+'/public/styles')
+    .pipe gulp.dest(pub_dir+'/styles')
 
 gulp.task 'compile-html', () ->
   compileFileName = 'index.erb'
@@ -41,24 +43,32 @@ gulp.task 'compile-html', () ->
     .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
     .pipe jade()
     .pipe concat(compileFileName)
-    .pipe gulp.dest(pub_dir+'/views')
+    .pipe gulp.dest(view_dir)
 
 gulp.task 'compile-image', () ->
   gulp.src ['source/resources/**/*']
     .pipe imagemin()
-    .pipe gulp.dest(pub_dir+'/public/resources')
+    .pipe gulp.dest(pub_dir+'/resources')
 
 gulp.task 'move-vendors', () ->
   gulp.src ['dev/vendors/**/*']
-    .pipe gulp.dest(pub_dir+'/public/vendors')
+    .pipe gulp.dest(pub_dir+'/vendors')
 
 gulp.task 'move-pjs', () ->
   gulp.src ['source/pjs/**/*']
-    .pipe gulp.dest(pub_dir+'/public/pjs')
+    .pipe gulp.dest(pub_dir+'/pjs')
 
 gulp.task 'webserver', () ->
   gulp.src pub_dir
     .pipe server(livereload:true)
+
+gulp.task 'open', () ->
+  option = {
+    url: 'localhost:9393',
+    app: 'google-chrome'
+  }
+  gulp.src('./')
+    .pipe open(option)
 
 gulp.task 'clean' , (cb) ->
   del ['app/public', 'app/views'], cb

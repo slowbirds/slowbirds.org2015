@@ -46,3 +46,4 @@ build/
 /app/views/*
 .sass*
 source/.tmp/
+/vagrant/
