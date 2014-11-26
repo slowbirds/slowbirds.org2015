@@ -25,8 +25,9 @@ makeView = (start,summary,description) ->
   # make description
   $description = document.createElement "p"
   $description.classList.add("unactive")
-  $description.innerHTML = helper.htmlize description
   detail_url = description.match /(https?:\/\/[\x21-\x7e]+)/
+  description = description.replace /(https?:\/\/[\x21-\x7e]+\n)/, ""
+  $description.innerHTML = description.replace(/\n/,"<br>")
 
   # deploy elements
   $item.appendChild $summary
@@ -36,7 +37,7 @@ makeView = (start,summary,description) ->
   # add events
   if detail_url != null
     $item.addEventListener "click", ()->
-      window.open detail_url
+      window.open detail_url[0]
   $item.addEventListener "mouseover", ()->
     $description.classList.remove("unactive")
     $description.classList.add("active")

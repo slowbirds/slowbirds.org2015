@@ -33,12 +33,16 @@ h1
 
 h2
   font-size: 18px
-  overflow: hidden
   margin: 20px auto 0
-  color: #ddd
+  color: frontcolor
+  filter: blur(1px)
+  -webkit-filter: blur(1px)
+  -moz-filter: blur(1px)
+  -o-filter: blur(1px)
+  -ms-filter: blur(1px)
 
 #container
-  margin: 0 auto
+  margin: 0 auto 100px
   width: 760px
 
 #mainvisual
@@ -47,8 +51,7 @@ h2
   text-align: center
   canvas
     cursor: pointer
-
-
+    outline: none
 
 ul#navigation
   text-align: center
@@ -69,20 +72,22 @@ ul#navigation
       -o-filter: blur(blur)
       -ms-filter: blur(blur)
       &:hover
-        -webkit-animation: blurfade 1.4s reverse ease-in-out
-        animation: blurfade 1.4s reverse ease-in-out
+        -webkit-animation: blurfade 1s reverse ease-in-out
+        animation: blurfade 1s reverse ease-in-out
         -webkit-animation-fill-mode: both
         animation-fill-mode: both
 
 ol#events
   text-align: center
-  margin: 20px auto 0
+  margin: -5px auto 0
   padding: 0
   list-style: none
+  z-index: 10
+  background: rgba(255,255,255,0.1);
   li
     text-align: left
     position: relative
-    width: 240px
+    width: 237px
     height: 120px
     float: left
     margin: 0
@@ -90,22 +95,22 @@ ol#events
     z-index: 10
     font-size: 11pt
     &:first-child
-      width: 280px
+      width: 274px
       h3
         font-size: 14pt
-        font-weight: bold
-        width: 264px
+        width: 258px
       p
-        width: 264px
+        width: 258px
 
   h3
     font-size: 100%
-    font-weight: normal
+    font-weight: bold
     padding: 6px
     margin: 0
     z-index: 10
     height: 104px
-    width: 224px
+    width: 221px
+    color: #999;
     strong
       color: #ddd
 
@@ -114,7 +119,7 @@ ol#events
     position: absolute
     top:0
     left: 0
-    width: 224px
+    width: 221px
     height: 104px
     padding: 6px
     margin: 0

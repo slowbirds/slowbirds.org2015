@@ -3,23 +3,23 @@
 
 helper.getJson = (type,cb) ->
   xhr = new XMLHttpRequest()
-  xhr.open('GET', '/api/proxy/'+type)
+  xhr.open 'GET', '/api/proxy/'+type
 
   xhr.onreadystatechange = () ->
     if xhr.readyState == 4 && xhr.status == 200
-      cb(xhr.responseText)
+      cb xhr.responseText
     else if xhr.readyState == 4 && xhr.status != 200
-      error(xhr.status)
+      error xhr.status
     return this
 
   xhr.send()
   return this
 
 helper.htmlize = (str) ->
-  str = str.replace /\n/gi,'<br>'
   str = str.replace /(https?:\/\/[\x21-\x7e]+)/gi, "<a href=$1>$1</a>"
   str = str.replace /&/gi,'&amp;'
   str = str.replace /\"/gi, '&quote'
+  str = str.replace /\n/gi,'<br>'
   return str
 
 helper.formatDate = (date, format) ->
