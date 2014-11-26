@@ -2,7 +2,7 @@ gulp   = require 'gulp'
 jade   = require 'gulp-jade'
 coffee = require 'gulp-coffee'
 uglify = require 'gulp-uglify'
-sass   = require 'gulp-ruby-sass'
+stylus  = require 'gulp-stylus'
 minify = require 'gulp-minify-css'
 concat = require 'gulp-concat'
 watch  = require 'gulp-watch'
@@ -29,9 +29,9 @@ gulp.task 'compile-js', () ->
 
 gulp.task 'compile-css', () ->
   compileFileName = 'application.min.css'
-  gulp.src ['source/sass/**/*.scss','dev/vendors/**/*.css']
+  gulp.src ['source/stylus/**/*.stylus','dev/vendors/**/*.css']
     .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
-    .pipe sass()
+    .pipe stylus()
     .pipe gulp.dest('source/.tmp/')
     .pipe concat(compileFileName)
     .pipe minify()
@@ -82,7 +82,7 @@ gulp.task 'compile', [
   'compile-image'
 ]
 gulp.task 'watch', () ->
-  gulp.watch 'source/sass/**/*.scss', ->
+  gulp.watch 'source/stylus/**/*.stylus', ->
     gulp.start 'compile-css'
   gulp.watch 'source/coffee/**/*.coffee', ->
     gulp.start 'compile-js'
