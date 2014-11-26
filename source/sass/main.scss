@@ -49,11 +49,7 @@ $unactive_blur: 3px;
 }
 
 html {
-  background: #000 /*url(/resources/background.jpg)*/ no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background: #000 no-repeat center center fixed;
 }
 body {
   color: $color;
@@ -175,6 +171,11 @@ ol#events {
     margin: 0;
     z-index: 10;
     cursor: pointer;
+    overflow: hidden;
+  }
+  a {
+    text-decoration: none;
+    color: #fff;
   }
   .active {
     filter: blur(0);
@@ -182,7 +183,7 @@ ol#events {
     -moz-filter: blur(0);
     -o-filter: blur(0);
     -ms-filter: blur(0);
-    z-index:20;
+    z-index: 20;
   }
   .unactive {
     filter: blur($unactive_blur);
@@ -248,7 +249,6 @@ iframe {
     -webkit-animation-delay: -0.32s;
     animation-delay: -0.32s;
   }
-
   .bounce2 {
     -webkit-animation-delay: -0.16s;
     animation-delay: -0.16s;
@@ -259,7 +259,6 @@ iframe {
   0%, 80%, 100% { -webkit-transform: scale(0.0) }
   40% { -webkit-transform: scale(1.0) }
 }
-
 @keyframes bouncedelay {
   0%, 80%, 100% {
     transform: scale(0.0);

@@ -16,10 +16,10 @@ helper.getJson = (type,cb) ->
   return this
 
 helper.htmlize = (str) ->
-  str = str.replace /\n/gi,'<br>'
   str = str.replace /(https?:\/\/[\x21-\x7e]+)/gi, "<a href=$1>$1</a>"
   str = str.replace /&/gi,'&amp;'
   str = str.replace /\"/gi, '&quote'
+  str = str.replace /\n/gi,'<br>'
   return str
 
 helper.formatDate = (date, format) ->
