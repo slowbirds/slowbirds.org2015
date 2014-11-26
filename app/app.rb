@@ -15,7 +15,9 @@ class Server < Sinatra::Base
     channel = params[:splat][0]
     datafetch = Datafetch.new()
     res = datafetch.getData(channel)
-
+    if res["Content-Type"] == "application/json" then
+      res["Content-Type"] = "text/javascript"
+    end
     #output
     status res.code
     content_type res["Content-type"]

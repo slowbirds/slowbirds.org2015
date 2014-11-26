@@ -2,7 +2,51 @@ $color: #fafaff;//rgba(255,255,255,0.9);
 $baseColor: #333;
 $mainColor: #fafaff;
 $specialColor: #FFBE40;
-$blur: 1px;
+$blur: 2px;
+$unactive_blur: 3px;
+
+@keyframes blur {
+  0% {
+    filter: blur(0);
+    -webkit-filter: blur(0);
+    -moz-filter: blur(0);
+    -o-filter: blur(0);
+    -ms-filter: blur(0);
+  }
+  100% {
+    filter: blur($unactive_blur);
+    -webkit-filter: blur($unactive_blur);
+    -moz-filter: blur($unactive_blur);
+    -o-filter: blur($unactive_blur);
+    -ms-filter: blur($unactive_blur);
+  }
+}
+@-webkit-keyframes blur {
+  0% {
+    filter: blur(0);
+    -webkit-filter: blur(0);
+  }
+  100% {
+    filter: blur($unactive_blur);
+    -webkit-filter: blur($unactive_blur);
+  }
+}
+@keyframes fadein {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadein {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 
 html {
   background: #000 /*url(/resources/background.jpg)*/ no-repeat center center fixed;
@@ -15,6 +59,8 @@ body {
   color: $color;
   font-size: 14pt;
   font-family: Helvetica Neue, Helvetica, Meiryo, sans-serif;
+  -webkit-animation: blur 1.4s reverse ease-in-out;
+  animation: blur 1.4s reverse ease-in-out;
 }
 h1 {
   background: url(/resources/logo.png) no-repeat center left;
@@ -33,50 +79,130 @@ h1 {
   }
 }
 h2 {
-  display: none;
+  font-size: 18px;
+  overflow: hidden;
+  margin: 20px auto 0;
+  color: #ddd;
 }
 #container {
   margin: 0 auto;
+  width: 760px;
 }
 #mainvisual {
   margin: 0 auto;
-  width: 640px;
   padding: 0;
   text-align: center;
   canvas {
     cursor: pointer;
   }
 }
-ul {
+
+ul#navigation {
   text-align: center;
   margin: 20px 0 0;
+  li {
+    display: inline-block;
+    margin: 0;
+    a {
+      color: $color;
+      text-decoration: none;
+      display: block;
+      margin: 2px;
+      padding: 8px;
+      opacity: 0.8;
+      filter: blur($blur);
+      -webkit-filter: blur($blur);
+      -moz-filter: blur($blur);
+      -o-filter: blur($blur);
+      -ms-filter: blur($blur);
+      &:hover {
+        -webkit-animation: blur 1.4s reverse ease-in-out;
+        animation: blur 1.4s reverse ease-in-out;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+      }
+    }
+  }
 }
-li {
-  display: inline-block;
-  margin: 0;
-}
-li a {
-  color: $color;
-  text-decoration: none;
-  display: block;
-  margin: 2px;
-  padding: 8px;
-  opacity: 0.8;
-  filter: blur($blur);
-  -webkit-filter: blur($blur);
-  -moz-filter: blur($blur);
-  -o-filter: blur($blur);
-  -ms-filter: blur($blur);
-  filter: url(#blur);
-  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='6');
-  &:hover {
+
+ol#events {
+  text-align: center;
+  margin: 20px auto 0;
+  padding: 0;
+  list-style: none;
+  li {
+    text-align: left;
+    position: relative;
+    width: 240px;
+    height: 120px;
+    float: left;
+    margin: 0;
+    list-style: none;
+    z-index: 10;
+    font-size: 11pt;
+    &:first-child {
+      width: 280px;
+      h3 {
+        font-size: 14pt;
+        font-weight: bold;
+        width: 264px;
+      }
+      p {
+        width: 264px;
+      }
+    }
+  }
+  h3 {
+    font-size: 100%;
+    font-weight: normal;
+    padding: 6px;
+    margin: 0;
+    z-index: 10;
+    height: 104px;
+    width: 224px;
+    strong {
+      color: #ddd;
+    }
+  }
+  p {
+    font-size: 10pt;
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 224px;
+    height: 104px;
+    padding: 6px;
+    margin: 0;
+    z-index: 10;
+    cursor: pointer;
+  }
+  .active {
     filter: blur(0);
     -webkit-filter: blur(0);
     -moz-filter: blur(0);
     -o-filter: blur(0);
     -ms-filter: blur(0);
+    z-index:20;
+  }
+  .unactive {
+    filter: blur($unactive_blur);
+    -webkit-filter: blur($unactive_blur);
+    -moz-filter: blur($unactive_blur);
+    -o-filter: blur($unactive_blur);
+    -ms-filter: blur($unactive_blur);
+    opacity: 0.8;
+    z-index: 5;
+  }
+  &:after {
+    content: ".";
+    display: block;
+    height: 0px;
+    overflow: none;
+    visibility: hidden;
+    clear: both;
   }
 }
+
 iframe {
   margin: 10px auto;
 }
@@ -104,7 +230,7 @@ iframe {
 .spinner {
   width: 54px;
   height: 18px;
-  margin: 100px auto;
+  margin: 20px auto;
   div {
     width: 18px;
     height: 18px;
