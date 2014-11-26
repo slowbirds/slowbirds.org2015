@@ -1,15 +1,56 @@
-json = 'http://www.google.com/calendar/feeds/4meuj23muscevi0rhh5ima9gi0%40group.calendar.google.com/public/basic?alt=json-in-script&callback=gcal&orderby=starttime&sortorder=ascending&futureevents=true&max-results=3'
+init = () ->
+  json = 'gcal'
+  $loading = helper.setLoading document.getElementById "events"
+  helper.getJson json,gotList
+  return $loading
 
-setTimeout () ->
-  s = document.createElement "script"
-  s.src = json
-  s.type = "text/javascript"
-  document.body.appendChild s
-, 0
+gotList = (json) ->
+  json = JSON.parse json
 
-@gcal = (feed) ->
-  events = feed.feed.entry
-  for event in events
-    console.log event.title.$t
-    console.log event.content.$t
-  console.log feed.feed
+  # remove loading content
+  helper.removeLoading($loading)
+  for item in json.items
+    makeView(item.start, item.summary, item.description)
+
+makeView = (start,summary,description) ->
+  # init elements
+  $list = document.getElementById "events"
+  $item = document.createElement "li"
+  start = helper.formatDate(new Date(start.dateTime), "YYYY. MM.DD hh:mm -")
+
+  # make summary
+  $summary = document.createElement "h3"
+  $summary.innerHTML = helper.htmlize("<strong>"+start + '</strong><br>' + summary)
+
+  # make description
+  $description = document.createElement "p"
+  $description.classList.add("unactive")
+  $description.innerHTML = helper.htmlize description
+  detail_url = description.match /(https?:\/\/[\x21-\x7e]+)/
+
+  # deploy elements
+  $item.appendChild $summary
+  $item.appendChild $description
+  $list.appendChild $item
+
+  # add events
+  if detail_url != null
+    $item.addEventListener "click", ()->
+      window.open detail_url
+  $item.addEventListener "mouseover", ()->
+    $description.classList.remove("unactive")
+    $description.classList.add("active")
+    $summary.classList.remove("active")
+    $summary.classList.add("unactive")
+  $item.addEventListener "mouseout", ()->
+    $description.classList.remove("active")
+    $description.classList.add("unactive")
+    $summary.classList.remove("unactive")
+    $summary.classList.add("active")
+  $description.addEventListener "mouseout", ()->
+    $description.classList.remove("active")
+    $description.classList.add("unactive")
+    $summary.classList.remove("unactive")
+    $summary.classList.add("active")
+
+$loading = init()

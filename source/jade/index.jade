@@ -13,8 +13,8 @@ html
       div.content
         div#mainvisual
           canvas(datasrc="/pjs/mainvisual.pjs",width="640",height="480")
-        h2 other works
-        ul
+
+        ul#navigation
           li
             a(href="http://notes.slowbirds.org") NOTES
           li
@@ -29,6 +29,9 @@ html
             a(href="http://www.facebook.com/slowbirds") FACEBOOK
           li
             a(href="http://www.twitter.com/slowbirds") TWITTER
+
+        h2 Upcoming events
+        ol#events
 
     script(src="/vendors/Processing.js/processing.min.js")
     script(src="/scripts/application.min.js",charset='UTF-8')
