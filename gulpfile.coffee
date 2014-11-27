@@ -51,7 +51,7 @@ gulp.task 'compile-image', () ->
     .pipe gulp.dest(pub_dir+'/resources')
 
 gulp.task 'move-vendors', () ->
-  gulp.src ['dev/vendors/**/*']
+  gulp.src ['dev/vendors/**/*','bower_components/**/*']
     .pipe gulp.dest(pub_dir+'/vendors')
 
 gulp.task 'move-pjs', () ->
