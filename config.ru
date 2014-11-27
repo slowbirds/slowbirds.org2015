@@ -1,4 +1,4 @@
 require 'bundler'
-require File.dirname( __FILE__ ) + '/app/app'
+require './app/app.rb'
 
-run Server
+run MainApp

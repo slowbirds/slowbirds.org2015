@@ -6,7 +6,7 @@ require 'json'
 
 require_relative 'models/init'
 
-class Server < Sinatra::Base
+class MainApp < Sinatra::Base
   get '/' do
     erb :index
   end
