@@ -1,7 +1,6 @@
-slowbirds.org2015
-=================
+# slowbirds.org2015
 
-with sinatra
+[![Build Status](https://travis-ci.org/slowbirds/slowbirds.org2015.svg?branch=master)](https://travis-ci.org/slowbirds/slowbirds.org2015)
 
 ## gulp
 - coffeescript
