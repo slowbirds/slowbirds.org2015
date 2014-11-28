@@ -8,7 +8,7 @@ gem 'rack'
 gem 'rack-test'
 
 group :production do
-  #gem 'unicorn'
+  gem 'unicorn'
 end
 
 group :development do
