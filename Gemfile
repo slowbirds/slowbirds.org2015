@@ -15,6 +15,6 @@ group :development do
     gem 'shotgun'
 end
 
-group :test do
+group :test, :development do
   gem 'rspec'
 end
