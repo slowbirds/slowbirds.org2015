@@ -17,4 +17,6 @@ end
 
 group :test, :development do
   gem 'rspec'
+  gem 'coveralls', :require => false
+  gem 'simplecov'
 end
