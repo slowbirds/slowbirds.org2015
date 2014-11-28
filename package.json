@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/slowbirds/slowbirds.org2015",
   "devDependencies": {
+    "gulp": "^3.8.10",
     "coffee-script": "^1.8.0",
     "gulp-coffee": "^2.2.0",
     "gulp-concat": "^2.4.1",
