@@ -13,11 +13,8 @@ set :run, false
 set :raise_errors, true
 set :logging, false
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
-SimpleCov.start 'rails'
+require 'coveralls'
+Coveralls.wear!
 
 RSpec.configure do |conf|
   conf.include Rack::Test::Methods
