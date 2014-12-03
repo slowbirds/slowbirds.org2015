@@ -1,5 +1,7 @@
 class Mainvisual
-  $content = null;
+  
+  $content = null
+
   constructor: (content) ->
     $content = content
     wrap = @

@@ -2,6 +2,7 @@ class Upcoming
 
   $loading = null
   $target = null
+  
   constructor: (target)->
     par = this
     $target = target
