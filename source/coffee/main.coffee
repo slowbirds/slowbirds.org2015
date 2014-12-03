@@ -1,24 +1,11 @@
-$content = document.getElementById 'mainvisual'
+# helper class
+Helper = require './helper'
+window.helper = new Helper()
 
-init = ->
-  $content.addEventListener "click", (e)->
-    $content.innerHTML=""
-    helper.setLoading $content
-    helper.getJson 'vimeo', gotJson
-    e.currentTarget.removeEventListener e.type,arguments.callee,false
+# Mainvisual class
+Mainvisual = require './mainvisual'
+mainvisual = new Mainvisual(document.getElementById 'mainvisual')
 
-gotJson = (res) ->
-  data = JSON.parse res
-  html = makeVimeo data[0]
-  $content.innerHTML = html
-  return this
-
-error = (e) ->
-  $content.innerHTML = e
-
-makeVimeo = (info) ->
-  $content.style.width = info.width
-  $content.style.height = info.height
-  return '<iframe src="//player.vimeo.com/video/'+info.id+'" width="'+info.width+'" height="'+info.height+'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
-
-init()
+# upcoming events class
+Upcoming = require './upcoming'
+upcoming = new Upcoming(document.getElementById "events")

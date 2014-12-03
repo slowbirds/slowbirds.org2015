@@ -11,25 +11,41 @@ livereload = require 'gulp-livereload'
 plumber = require 'gulp-plumber'
 notify  = require 'gulp-notify'
 imagemin= require 'gulp-imagemin'
-open    = require 'gulp-open'
-del     = require 'del'
+rename  = require 'gulp-rename'
+
+browserify = require 'browserify'
+coffeeify  = require 'coffeeify'
+source     = require 'vinyl-source-stream'
+streamify  = require 'gulp-streamify'
 
 pub_dir = 'app/public'
 view_dir = 'app/views'
 
+srcdata = {
+  'coffee': 'source/coffee/**/*.coffee'
+  'stylus': 'source/stylus/**/*.stylus'
+  'jade'  : 'source/jade/**/*.jade'
+  'image' : 'source/resources/**/*'
+  'pjs'   : 'source/pjs/**/*'
+  'bower' : ['dev/vendors/**/*','bower_components/**/*']
+}
+
 gulp.task 'compile-js', () ->
   compileFileName = 'application.min.js'
-  gulp.src ['source/coffee/**/*.coffee']
+  browserify
+      entries: ["./source/coffee/main.coffee"]
+      extensions: ['.coffee']
+    .transform 'coffeeify'
+    .bundle()
     .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
-    .pipe coffee()
-    .pipe gulp.dest('source/.tmp')
-    .pipe uglify()
-    .pipe concat(compileFileName)
-    .pipe gulp.dest(pub_dir+'/scripts')
+    .pipe source 'application.min.js'
+    .pipe streamify uglify({mangle: false})
+    .pipe gulp.dest pub_dir+'/scripts'
+
 
 gulp.task 'compile-css', () ->
   compileFileName = 'application.min.css'
-  gulp.src ['source/stylus/**/*.stylus','dev/vendors/**/*.css']
+  gulp.src srcdata.stylus
     .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
     .pipe stylus()
     .pipe gulp.dest('source/.tmp/')
@@ -39,62 +55,47 @@ gulp.task 'compile-css', () ->
 
 gulp.task 'compile-html', () ->
   compileFileName = 'index.erb'
-  gulp.src 'source/jade/**/*.jade'
+  gulp.src srcdata.jade
     .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
     .pipe jade()
-    .pipe concat(compileFileName)
+    .pipe rename(compileFileName)
     .pipe gulp.dest(view_dir)
 
 gulp.task 'compile-image', () ->
-  gulp.src ['source/resources/**/*']
+  gulp.src srcdata.image
     .pipe imagemin()
     .pipe gulp.dest(pub_dir+'/resources')
 
 gulp.task 'move-vendors', () ->
-  gulp.src ['dev/vendors/**/*','bower_components/**/*']
+  gulp.src srcdata.bower
     .pipe gulp.dest(pub_dir+'/vendors')
 
 gulp.task 'move-pjs', () ->
-  gulp.src ['source/pjs/**/*']
+  gulp.src srcdata.pjs
     .pipe gulp.dest(pub_dir+'/pjs')
 
 gulp.task 'webserver', () ->
   gulp.src pub_dir
     .pipe server(livereload:true)
 
-gulp.task 'open', () ->
-  option = {
-    url: 'localhost:9393',
-    app: 'google-chrome'
-  }
-  gulp.src('./')
-    .pipe open(option)
-
-gulp.task 'clean' , (cb) ->
-  del ['app/public', 'app/views'], cb
-
 gulp.task 'compile', [
-  'compile-js',
-  'compile-css',
-  'compile-html',
-  'move-vendors',
-  'move-pjs',
+  'compile-js'
+  'compile-css'
+  'compile-html'
+  'move-vendors'
+  'move-pjs'
   'compile-image'
 ]
 gulp.task 'watch', () ->
-  gulp.watch 'source/stylus/**/*.stylus', ->
-    gulp.start 'compile-css'
-  gulp.watch 'source/coffee/**/*.coffee', ->
-    gulp.start 'compile-js'
-  gulp.watch 'source/jade/**/*.jade', ->
-    gulp.start 'compile-html'
-  gulp.watch 'source/resources/**/*', ->
-    gulp.start 'compile-image'
-  gulp.watch 'source/pjs/**/*', ->
-    gulp.start 'move-pjs'
+  gulp.watch srcdata.stylus, ['compile-css']
+  gulp.watch srcdata.coffee, ['compile-js']
+  gulp.watch srcdata.jade, ['compile-html']
+  gulp.watch srcdata.image, ['compile-image']
+  gulp.watch srcdata.pjs, ['move-pjs']
+  gulp.watch srcdata.bower, ['move-vendors']
 
 gulp.task 'default', [
-  'compile',
-  'watch',
-  'webserver'
+  'compile'
+  'watch'
+  #'webserver'
 ]
