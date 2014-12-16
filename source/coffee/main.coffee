@@ -4,8 +4,10 @@ window.helper = new Helper()
 
 # Mainvisual class
 Mainvisual = require './mainvisual'
-mainvisual = new Mainvisual(document.getElementById 'mainvisual')
+mainvisual = new Mainvisual(helper.$id 'mainvisual')
+mainvisual.addEvent
 
 # upcoming events class
 Upcoming = require './upcoming'
-upcoming = new Upcoming(document.getElementById "events")
+upcoming = new Upcoming()
+upcoming.getList helper.$id "events"

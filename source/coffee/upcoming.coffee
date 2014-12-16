@@ -2,11 +2,14 @@ class Upcoming
 
   $loading = null
   $target = null
-  
-  constructor: (target)->
+
+  constructor: ()->
+    return @
+
+  getList: (target) ->
     par = this
-    $target = target
     json = 'gcal'
+    $target = target
     $loading = helper.setLoading $target
     helper.getJson json,par.gotList
     return $loading
@@ -27,7 +30,7 @@ class Upcoming
 
     # make summary
     $summary = document.createElement "h3"
-    $summary.innerHTML = helper.htmlize("<strong>"+start + '</strong><br>' + summary)
+    $summary.innerHTML = helper.htmlize "<strong>#{start}</strong><br>#{summary}"
 
     # make description
     $description = document.createElement "p"

@@ -2,9 +2,12 @@ class Helper
 
   constructor: (args)->
 
+  $id: (id) ->
+    return getElementById id
+
   getJson: (type,cb) ->
     xhr = new XMLHttpRequest()
-    xhr.open 'GET', '/api/proxy/'+type
+    xhr.open 'GET', "/api/proxy/#{type}"
 
     xhr.onreadystatechange = () ->
       if xhr.readyState == 4 && xhr.status == 200
