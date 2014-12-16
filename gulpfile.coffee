@@ -58,7 +58,7 @@ gulp.task 'compile-html', () ->
   gulp.src srcdata.jade
     .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
     .pipe jade()
-    .pipe rename(compileFileName)
+    .pipe rename extname: '.erb'
     .pipe gulp.dest(view_dir)
 
 gulp.task 'compile-image', () ->

@@ -4,13 +4,19 @@ mainColor = #fafaff
 specialColor = #FFBE40
 blur = 2px
 unactive_blur = 3px
+base_font = 14pt
+
+vendor(prop, args)
+  -webkit-{prop} args
+  -moz-{prop} args
+  {prop} args
 
 html
   background: #000 no-repeat center center fixed
 
 body
   color: frontcolor
-  font-size: 14pt
+  font-size: base_font
   font-family: Helvetica Neue, Helvetica, Meiryo, sans-serif
   -webkit-animation: blurfade 1.4s reverse ease-in-out
   animation: blurfade 1.4s reverse ease-in-out
@@ -32,14 +38,10 @@ h1
     font-size: 0
 
 h2
-  font-size: 18px
+  font-size: (base_font * 1.4)
   margin: 20px auto 0
   color: frontcolor
-  filter: blur(1px)
-  -webkit-filter: blur(1px)
-  -moz-filter: blur(1px)
-  -o-filter: blur(1px)
-  -ms-filter: blur(1px)
+  vendor(filter,blur(1px))
 
 #container
   margin: 0 auto 100px
@@ -66,11 +68,7 @@ ul#navigation
       margin: 2px
       padding: 8px
       opacity: 0.8
-      filter: blur(blur)
-      -webkit-filter: blur(blur)
-      -moz-filter: blur(blur)
-      -o-filter: blur(blur)
-      -ms-filter: blur(blur)
+      vendor(filter,blur(blur))
       &:hover
         -webkit-animation: blurfade 1s reverse ease-in-out
         animation: blurfade 1s reverse ease-in-out
@@ -93,11 +91,11 @@ ol#events
     margin: 0
     list-style: none
     z-index: 10
-    font-size: 11pt
+    font-size: (base_font * 0.8)
     &:first-child
       width: 274px
       h3
-        font-size: 14pt
+        font-size: base_font
         width: 258px
       p
         width: 258px
@@ -115,7 +113,7 @@ ol#events
       color: #ddd
 
   p
-    font-size: 10pt
+    font-size: (base_font * 0.6)
     position: absolute
     top:0
     left: 0
@@ -132,19 +130,11 @@ ol#events
     color: #fff
 
   .active
-    filter: blur(0)
-    -webkit-filter: blur(0)
-    -moz-filter: blur(0)
-    -o-filter: blur(0)
-    -ms-filter: blur(0)
+    vendor(filter,blur(0))
     z-index: 20
 
   .unactive
-    filter: blur(unactive_blur)
-    -webkit-filter: blur(unactive_blur)
-    -moz-filter: blur(unactive_blur)
-    -o-filter: blur(unactive_blur)
-    -ms-filter: blur(unactive_blur)
+    vendor(filter,blur(unactive_blur))
     opacity: 0.8
     z-index: 5
 
@@ -161,8 +151,32 @@ ol#events
 iframe
   margin: 10px auto
 
+.hexagon
+  position: relative
+  width: 300px
+  height: 173.21px
+  background-color: #64C7CC
+  margin: 86.60px 0
+
+  &:before,
+  &:after
+    content: ""
+    position: absolute
+    width: 0
+    border-left: 150px solid transparent
+    border-right: 150px solid transparent
+
+  &:before
+    bottom: 100%
+    border-bottom: 86.60px solid #64C7CC
+
+  &:after
+    top: 100%
+    width: 0
+    border-top: 86.60px solid #64C7CC
+
 .more
-  font-size: 12pt
+  font-size: (base_font * 0.8)
   text-align: center
   margin: 0
   a
