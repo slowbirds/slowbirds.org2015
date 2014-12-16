@@ -3,9 +3,9 @@ Helper = require './helper'
 window.helper = new Helper()
 
 # Mainvisual class
-Mainvisual = require './mainvisual'
-mainvisual = new Mainvisual(helper.$id 'mainvisual')
-mainvisual.addEvent
+#Mainvisual = require './mainvisual'
+#mainvisual = new Mainvisual(helper.$id 'mainvisual')
+#mainvisual.addEvent
 
 # upcoming events class
 Upcoming = require './upcoming'
