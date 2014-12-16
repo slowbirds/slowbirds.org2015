@@ -1,6 +1,6 @@
-frontcolor = #fafaff
+frontcolor = #999
 baseColor = #333
-mainColor = #fafaff
+mainColor = #ddd
 specialColor = #FFBE40
 blur = 2px
 unactive_blur = 3px
@@ -12,7 +12,8 @@ vendor(prop, args)
   {prop} args
 
 html
-  background: #000 no-repeat center center fixed
+  background: #eee url(/resources/landscape_1280.jpg) center center no-repeat fixed
+  background-size: cover
 
 body
   color: frontcolor
@@ -22,30 +23,30 @@ body
   animation: blurfade 1.4s reverse ease-in-out
 
 h1
-  background: url(/resources/logo.png) no-repeat center left
-  height: 180px
-  width: 350px
-  font-size: 0
+  background: url(/resources/birdscircle.png) no-repeat 10px center
+  width: 380px
   margin: 0 auto
-  padding: 0
-  position: fixed
-  top: 0
-  left: 20px
+  padding: 360px 0 0;
+  text-align: center
+  position: relative
   a
     display: block
-    height: 125px
-    width: 250px
-    font-size: 0
+    text-decoration: none
+    color: frontcolor
+    opacity: 0.3
+    position: absolute
+    width: 100%
+    top: 155px
+    left: 0
+    font-weight: normal
 
 h2
   font-size: (base_font * 1.4)
-  margin: 20px auto 0
+  margin: 20px 100px 0
   color: frontcolor
-  vendor(filter,blur(1px))
 
 #container
   margin: 0 auto 100px
-  width: 760px
 
 #mainvisual
   margin: 0 auto
@@ -68,20 +69,19 @@ ul#navigation
       margin: 2px
       padding: 8px
       opacity: 0.8
-      vendor(filter,blur(blur))
       &:hover
-        -webkit-animation: blurfade 1s reverse ease-in-out
-        animation: blurfade 1s reverse ease-in-out
+        -webkit-animation: blurfade 1s ease-in-out
+        animation: blurfade 1s ease-in-out
         -webkit-animation-fill-mode: both
         animation-fill-mode: both
 
 ol#events
   text-align: center
   margin: -5px auto 0
-  padding: 0
+  padding: 0 100px
   list-style: none
   z-index: 10
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.4);
   li
     text-align: left
     position: relative
@@ -108,9 +108,9 @@ ol#events
     z-index: 10
     height: 104px
     width: 221px
-    color: #999;
+    color: #666
     strong
-      color: #ddd
+      color: #777
 
   p
     font-size: (base_font * 0.6)
@@ -124,6 +124,7 @@ ol#events
     z-index: 10
     cursor: pointer
     overflow: hidden
+    color: #666
 
   a
     text-decoration: none

@@ -3,7 +3,7 @@ class Helper
   constructor: (args)->
 
   $id: (id) ->
-    return getElementById id
+    return document.getElementById id
 
   getJson: (type,cb) ->
     xhr = new XMLHttpRequest()
