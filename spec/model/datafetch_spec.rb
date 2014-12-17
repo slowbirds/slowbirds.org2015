@@ -1,11 +1,18 @@
 require 'spec_helper'
 
 describe Datafetch do
-  it "existing API" do
-    real_obj = Datafetch.new
-    double_obj = double('datafetch')
+  before { @datafetch = Datafetch.new }
+  context 'when arg is unexisting' do
+    it 'returns 404' do
+      ret = @datafetch.getData('dummy')
+      expect(ret[:status]).to eql(404)
+    end
+  end
 
-    ret = Datafetch.new.getData("vim")
-    ret
+  context 'when arg is existing' do
+    it 'returns json' do
+      ret = @datafetch.getData('vimeo')
+      expect(ret).not_to be_nil
+    end
   end
 end
