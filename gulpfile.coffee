@@ -33,8 +33,8 @@ srcdata = {
 gulp.task 'compile-js', () ->
   compileFileName = 'application.min.js'
   browserify
-    entries: ['./source/coffee/main.coffee']
-    extensions: ['.coffee']
+      entries: ['./source/coffee/main.coffee']
+      extensions: ['.coffee']
     .transform 'coffeeify'
     .bundle()
     .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
