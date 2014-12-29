@@ -47,6 +47,7 @@ class Upcoming
     # add events
     if detail_url != null
       $item.addEventListener "click", ()->
+        mixpanel.track "clickEvent"
         window.open detail_url[0]
     $item.addEventListener "mouseover", ()->
       $description.classList.remove("unactive")
