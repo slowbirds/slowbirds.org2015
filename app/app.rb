@@ -15,13 +15,23 @@ class MainApp < Sinatra::Base
     channel = params[:splat][0]
     datafetch = Datafetch.new()
     res = datafetch.getData(channel)
-    if res["Content-Type"] == "application/json" then
-      res["Content-Type"] = "text/javascript"
+    # error
+    if res.nil? then
+      status 404
+      "Not Found"
+      return false
     end
+
     #output
-    status res.code
-    content_type res["Content-type"]
-    res.body
+    status 200
+    content_type "text/javascript"
+    res
+  end
+
+  get '/api/getLatestProducts' do
+    datafetch = Datafetch.new()
+    res = datafetch.getLatestProducts(10)
+    res
   end
 
 end

@@ -39,7 +39,7 @@ gulp.task 'compile-js', () ->
     .bundle()
     .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
     .pipe source 'application.min.js'
-    .pipe streamify uglify({mangle: false})
+    #.pipe streamify uglify({mangle: false})
     .pipe gulp.dest pub_dir+'/scripts'
 
 
