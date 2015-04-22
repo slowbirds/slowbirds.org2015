@@ -35,6 +35,10 @@ class Products
     # init elements
     $list = document.getElementById "products"
     $item = document.createElement "li"
+    $item.style.backgroundImage = "url(#{info.thumbnail})"
+
+    $content = document.createElement "div"
+    $content.className = "productsContent"
 
     # make summary
     $summary = document.createElement "h3"
@@ -43,14 +47,18 @@ class Products
     # make description
     $description = document.createElement "p"
     if info.thumbnail != null
-      description = "<a href='#{info.url}'><img src='#{info.thumbnail}'></a>"
+      description = "#{info.channel}"
       $description.innerHTML = description
     else
       description = "";
 
+    $item.addEventListener "click", ()->
+      location.href="#{info.url}"
+
     # deploy elements
-    $item.appendChild $summary
-    $item.appendChild $description
+    $content.appendChild $summary
+    $content.appendChild $description
+    $item.appendChild $content
     $list.appendChild $item
 
 module.exports = Products
