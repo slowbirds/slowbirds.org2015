@@ -8,10 +8,10 @@ class Upcoming
 
   getList: (target) ->
     par = this
-    json = 'gcal'
+    url ="/api/proxy/gcal"
     $target = target
     $loading = helper.setLoading $target
-    helper.getJson json,par.gotList
+    helper.getJson url,par.gotList
     return $loading
 
   gotList: (json) ->

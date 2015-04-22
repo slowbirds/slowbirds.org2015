@@ -5,13 +5,13 @@ class Helper
   $id: (id) ->
     return document.getElementById id
 
-  getJson: (type,cb) ->
+  getJson: (url,callback) ->
     xhr = new XMLHttpRequest()
-    xhr.open 'GET', "/api/proxy/#{type}"
+    xhr.open 'GET', url
 
     xhr.onreadystatechange = () ->
       if xhr.readyState == 4 && xhr.status == 200
-        cb xhr.responseText
+        callback xhr.responseText
       else if xhr.readyState == 4 && xhr.status != 200
         error xhr.status
       return this

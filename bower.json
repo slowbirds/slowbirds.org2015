@@ -15,8 +15,9 @@
     "tests"
   ],
   "devDependencies": {
-    "modularized-normalize-scss": "~3.0.2",
-    "Processing.js": "1.4.8",
-    "normalize-css": "3.0.2"
+    "vague.js": "~0.0.6"
+  },
+  "dependencies": {
+    "normalize.css": "~3.0.3"
   }
 }
