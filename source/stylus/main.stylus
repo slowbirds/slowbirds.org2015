@@ -156,7 +156,25 @@ ol#events
     visibility: hidden
     clear: both
 
-
+#products
+  list-style: none
+  margin: 0 200px
+  li
+    list-style: none
+    cursor: pointer
+    width: 200px
+    height: 150px
+    margin: 0 3px 3px 0
+    background: transparent no-repeat left top
+    background-size: cover
+    display: inline-table
+    color: #fff
+    overflow: hidden
+    .productsContent
+      opacity: 0
+      padding: 12px
+      &:hover
+        opacity: 1
 
 iframe
   margin: 10px auto

@@ -5,9 +5,9 @@ class Helper
   $id: (id) ->
     return document.getElementById id
 
-  getJson: (type,cb) ->
+  getJson: (url,cb) ->
     xhr = new XMLHttpRequest()
-    xhr.open 'GET', "/api/proxy/#{type}"
+    xhr.open 'GET', url
 
     xhr.onreadystatechange = () ->
       if xhr.readyState == 4 && xhr.status == 200
