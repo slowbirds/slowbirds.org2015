@@ -77,9 +77,14 @@ ul#navigation
       margin: 2px
       padding: 8px
       opacity: 0.8
-      &:hover
+      &.unfocus
         -webkit-animation: blurfade 1s ease-in-out
         animation: blurfade 1s ease-in-out
+        -webkit-animation-fill-mode: both
+        animation-fill-mode: both
+      &.focus
+        -webkit-animation: unblurfade 1s ease-in-out
+        animation: unblurfade 1s ease-in-out
         -webkit-animation-fill-mode: both
         animation-fill-mode: both
 
@@ -265,6 +270,29 @@ iframe
   100%
     filter: blur(unactive_blur)
     -webkit-filter: blur(unactive_blur)
+
+@keyframes unblurfade
+  0%
+    filter: blur(unactive_blur)
+    -webkit-filter: blur(unactive_blur)
+    -moz-filter: blur(unactive_blur)
+    -o-filter: blur(unactive_blur)
+    -ms-filter: blur(unactive_blur)
+  100%
+    filter: blur(0)
+    -webkit-filter: blur(0)
+    -moz-filter: blur(0)
+    -o-filter: blur(0)
+    -ms-filter: blur(0)
+
+
+@-webkit-keyframes unblurfade
+  0%
+    filter: blur(unactive_blur)
+    -webkit-filter: blur(unactive_blur)
+  100%
+    filter: blur(0)
+    -webkit-filter: blur(0)
 
 @-webkit-keyframes bouncedelay
   0%, 80%, 100%
