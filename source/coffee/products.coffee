@@ -31,7 +31,7 @@ class Products
       })
 
   makeView = (info) ->
-    console.log info
+    #console.log info
     # init elements
     $list = document.getElementById "products"
     $item = document.createElement "li"

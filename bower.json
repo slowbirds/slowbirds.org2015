@@ -16,5 +16,8 @@
   ],
   "devDependencies": {
     "vague.js": "~0.0.6"
+  },
+  "dependencies": {
+    "normalize.css": "~3.0.3"
   }
 }

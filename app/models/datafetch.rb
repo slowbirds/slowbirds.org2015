@@ -41,7 +41,11 @@ class Datafetch
 
   def cacheData(channel, json)
     timestamp = @now.strftime("%Y%m%d%H")
-    filename = "#{@cacheDir}/#{channel}#{timestamp}.json"
+    cachelog = "#{@cacheDir}/#{channel}_log.txt"
+    filename = "#{@cacheDir}/#{channel}.json"
+    File.open(cachelog, "w") do |file|
+      file.write(timestamp)
+    end
     File.open(filename, "w") do |file|
       file.write(json)
     end
@@ -50,8 +54,16 @@ class Datafetch
 
   def isCached(channel)
     timestamp = @now.strftime("%Y%m%d%H")
-    filename = "#{@cacheDir}/#{channel}#{timestamp}.json"
-    if File.exist?(filename) then
+    cachelog = "#{@cacheDir}/#{channel}_log.txt"
+    filename = "#{@cacheDir}/#{channel}.json"
+    cached_time = "000000"
+    if File.exist?(cachelog) then
+      File.open(cachelog,"r") do |file|
+        cached_time = file.read
+      end
+    end
+
+    if cached_time == timestamp then
        return File.read(filename, :encoding => Encoding::UTF_8)
     end
 
