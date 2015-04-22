@@ -48,5 +48,6 @@ npm-debug.log
 .sass*
 source/.tmp/
 /vagrant/
-cache/
+/cache/*.txt
+/cache/*.json
 local.properties

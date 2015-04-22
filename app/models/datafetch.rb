@@ -6,7 +6,7 @@ class Datafetch
 
   def initialize()
     @now = Time.now
-    @cacheDir = "/Users/slowbirds/Documents/workspace/slowbirds.org2015/cache"
+    @cacheDir =  File.expand_path(File.dirname(File.dirname(File.dirname(__FILE__)))) + "/cache"
   end
 
   def getData(channel)
