@@ -30,7 +30,8 @@ class MainApp < Sinatra::Base
 
   get '/api/getLatestProducts' do
     datafetch = Datafetch.new()
-    res = datafetch.getLatestProducts(10)
+    limit = params['limit'] ? params['limit'].to_i : 3
+    res = datafetch.getLatestProducts(limit)
     res
   end
 
