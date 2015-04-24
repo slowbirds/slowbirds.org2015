@@ -14,6 +14,7 @@ class Datafetch
     apis = {
       'vimeo'=>"http://vimeo.com/api/v2/slowbirds/videos.json",
       'soundcloud'=>"http://api.soundcloud.com/users/slowbirds/tracks.json?client_id=660f0a677cd5572e6c06dc951c79d052",
+      'mixcloud' =>"http://api.mixcloud.com/slowbirds/cloudcasts/",
       'gcal'=>"https://www.googleapis.com/calendar/v3/calendars/4meuj23muscevi0rhh5ima9gi0%40group.calendar.google.com/events?key=AIzaSyCPEFbmlTpjI_7xHAladCnC7Tsn7F2QDeU&orderBy=startTime&singleEvents=true&timeZone=Asia%2FSaigon&maxResults=3&timeMin=#{now_iso}"
     }
     # undefined channel
@@ -116,10 +117,38 @@ class Datafetch
     return ret
   end
 
+  def parseMixcloud(max=10)
+    sc = JSON.parse(getData('mixcloud'))
+    count = 0
+    ret = Array.new
+    sc['data'].each do |item|
+      tags = ""
+      item['tags'].each do |tagval|
+        tags = "#{tags},#{tagval['name']}"
+      end
+      ret[count] = {
+        'title'     => item['name'],
+        'date'      => item['created_time'].gsub(/T/," ").gsub(/Z$/,""),
+        'timestamp' => item['created_time'].gsub(/([^0-9])/,""),
+        'url'       => item['url'],
+        'desc'      => "",
+        'thumbnail' => item['pictures']['large'],
+        'tags'      => tags,
+        'channel'   => 'mixcloud'
+      }
+      if count >= max then
+        break
+      end
+      count += 1
+    end
+    return ret
+  end
+
   def getLatestProducts(max)
     vimeo = parseVimeo(max)
     sc = parseSoundcloud(max)
-    json = vimeo.concat(sc)
+    mc = parseMixcloud(max)
+    json = vimeo.concat(sc).concat(mc)
     ret = json.sort_by { |hash| -hash['timestamp'].to_i }
     return ret.to_json
   end
