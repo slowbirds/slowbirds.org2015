@@ -145,11 +145,11 @@ ol#events
     color: #fff
 
   .active
-    vendor(filter,blur(0))
+    filter: blur(0)
     z-index: 20
 
   .unactive
-    vendor(filter,blur(unactive_blur))
+    filter: blur(unactive_blur)
     opacity: 0.8
     z-index: 5
 
@@ -163,12 +163,12 @@ ol#events
 
 #products
   list-style: none
-  margin: 0 200px
+  margin: 0 auto
   li
     list-style: none
     cursor: pointer
     width: 200px
-    height: 150px
+    height: 200px
     margin: 0 3px 3px 0
     background: transparent no-repeat left top
     background-size: cover
@@ -178,8 +178,12 @@ ol#events
     .productsContent
       opacity: 0
       padding: 12px
+      height: 176px
+      overflow: hidden
       &:hover
         opacity: 1
+  h3
+    font-size: 1.2rem
 
 iframe
   margin: 10px auto
