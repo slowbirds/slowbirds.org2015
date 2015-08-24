@@ -176,7 +176,7 @@ ol#events
     color: #fff
     overflow: hidden
     .productsContent
-      opacity: 0
+      opacity: 0.6
       padding: 12px
       height: 176px
       overflow: hidden
