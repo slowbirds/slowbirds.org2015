@@ -30,7 +30,8 @@ class Upcoming
 
     # make summary
     $summary = document.createElement "h3"
-    $summary.innerHTML = helper.htmlize "<strong>#{start}</strong><br>#{summary}"
+    tmpl = "<strong>#{start}</strong><br>#{summary}"
+    $summary.innerHTML = helper.htmlize tmpl
 
     # make description
     $description = document.createElement "p"

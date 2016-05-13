@@ -82,7 +82,7 @@ class Datafetch
         'timestamp' => item['upload_date'].gsub(/([^0-9])/,""),
         'url'       => item['url'],
         'desc'      => item['description'],
-        'thumbnail' => item['thumbnail_small'],
+        'thumbnail' => item['thumbnail_medium'].gsub(/_200x150/,"_300x300"),
         'tags'      => item['tags'],
         'channel'   => 'vimeo'
       }

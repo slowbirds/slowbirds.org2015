@@ -50,7 +50,7 @@ class Products
       description = "#{info.channel}"
       $description.innerHTML = description
     else
-      description = "";
+      description = ""
 
     $item.addEventListener "click", ()->
       location.href="#{info.url}"
