@@ -5,8 +5,6 @@ html
     title slowbirds.org
     meta(name='description', content='all about slowbirds')
     meta(name="viewport", content="width=device-width, initial-scale=1")
-    link(href="/vendors/normalize.css/normalize.css",rel="stylesheet",type="text/css")
-    link(href="/styles/application.min.css",rel="stylesheet",type="text/css")
     link(rel="shortcut icon", href="/resources/favicon.ico")
 
   body
@@ -32,6 +30,23 @@ html
 
         h2 Recently Products
         ol#products
+
+    script.
+      var link = document.createElement('link');
+      link.href = '/vendors/normalize.css/normalize.css';
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      var head = document.getElementsByTagName('head')[0];
+      head.appendChild(link);
+
+      link = document.createElement('link');
+      link.href = '/styles/application.min.css';
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      var head = document.getElementsByTagName('head')[0];
+      head.appendChild(link);
+      link = null;
+
 
     script(src="/scripts/application.min.js",charset='UTF-8')
 
