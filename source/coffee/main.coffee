@@ -3,9 +3,9 @@ Helper = require './helper'
 window.helper = new Helper()
 
 # products class
-Products = require './products'
-products = new Products()
-products.getList helper.$id "products"
+# Products = require './products'
+# products = new Products()
+# products.getList helper.$id "products"
 
 
 # navigation effects
