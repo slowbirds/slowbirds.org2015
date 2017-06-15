@@ -13,9 +13,8 @@ class Datafetch
     now_iso = CGI.escape(@now.iso8601)
     apis = {
       'vimeo'=>"http://vimeo.com/api/v2/slowbirds/videos.json",
-      'soundcloud'=>"http://api.soundcloud.com/users/slowbirds/tracks.json?client_id=660f0a677cd5572e6c06dc951c79d052",
-      'mixcloud' =>"http://api.mixcloud.com/slowbirds/cloudcasts/",
-      'gcal'=>"https://www.googleapis.com/calendar/v3/calendars/4meuj23muscevi0rhh5ima9gi0%40group.calendar.google.com/events?key=AIzaSyCPEFbmlTpjI_7xHAladCnC7Tsn7F2QDeU&orderBy=startTime&singleEvents=true&timeZone=Asia%2FSaigon&maxResults=3&timeMin=#{now_iso}"
+      'soundcloud'=>"https://api.soundcloud.com/users/1007965/tracks?client_id=660f0a677cd5572e6c06dc951c79d052",
+      'mixcloud' =>"http://api.mixcloud.com/slowbirds/cloudcasts/"
     }
     # undefined channel
     if !apis[channel] then
