@@ -35,7 +35,8 @@ class Products
     # init elements
     $list = document.getElementById "products"
     $item = document.createElement "li"
-    $item.style.backgroundImage = "url(#{info.thumbnail})"
+    if info.thumbnail != null
+      $item.style.backgroundImage = "url(#{info.thumbnail})"
 
     $content = document.createElement "div"
     $content.className = "productsContent"
@@ -46,11 +47,8 @@ class Products
 
     # make description
     $description = document.createElement "p"
-    if info.thumbnail != null
-      description = "#{info.channel}"
-      $description.innerHTML = description
-    else
-      description = ""
+    description = "#{info.channel}"
+    $description.innerHTML = description
 
     $item.addEventListener "click", ()->
       location.href="#{info.url}"
